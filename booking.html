@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Book Your Travel Ticket</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #dbeafe, #f0f9ff);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #0a74da;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .icons {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      font-size: 2rem;
+    }
+
+    .booking-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem auto;
+    }
+
+    .booking-buttons button {
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    .bus-btn { background-color: #2563eb; }
+    .car-btn { background-color: #16a34a; }
+    .flight-btn { background-color: #f59e0b; }
+    .train-btn { background-color: #dc2626; }
+
+    .bus-btn:hover { background-color: #1d4ed8; }
+    .car-btn:hover { background-color: #15803d; }
+    .flight-btn:hover { background-color: #d97706; }
+    .train-btn:hover { background-color: #b91c1c; }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem;
+    }
+
+    form {
+      background-color: #ffffff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    select {
+      margin-top: 0.5rem;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    button[type="submit"] {
+      background-color: #0a74da;
+      color: white;
+      padding: 1rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #064ea3;
+    }
+
+    #bookingResponse {
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: #e0f7fa;
+      border-left: 5px solid #0a74da;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      color: #055;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #0a74da;
+      color: white;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 600px) {
+      form {
+        padding: 1.5rem;
+      }
+
+      input[type="text"],
+      input[type="date"],
+      select {
+        font-size: 0.9rem;
+      }
+
+      .icons {
+        flex-direction: column;
+        gap: 1rem;
+        font-size: 1.5rem;
+      }
+
+      .booking-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <h1><i class="fas fa-ticket-alt"></i> Book Your Travel</h1>
+    <p>Plan your journey quickly and easily!</p>
+    <div class="icons">
+      <span title="Bus"><i class="fas fa-bus"></i></span>
+      <span title="Car"><i class="fas fa-car"></i></span>
+      <span title="Flight"><i class="fas fa-plane"></i></span>
+      <span title="Train"><i class="fas fa-train"></i></span>
+    </div>
+    <div class="booking-buttons">
+      <button class="bus-btn" onclick="lockBookingType('bus')"><i class="fas fa-bus"></i> Bus Booking</button>
+      <button class="car-btn" onclick="lockBookingType('car')"><i class="fas fa-car"></i> Cab Booking</button>
+      <button class="flight-btn" onclick="lockBookingType('flight')"><i class="fas fa-plane"></i> Flight Booking</button>
+      <button class="train-btn" onclick="lockBookingType('train')"><i class="fas fa-train"></i> Train Booking</button>
+    </div>
+  </header>
+
+  <main>
+    <form id="bookingForm">
+      <label>Direction:</label>
+      <div class="radio-group">
+        <label><input type="radio" name="direction" value="departure" required> Departure</label>
+        <label><input type="radio" name="direction" value="arrival"> Arrival</label>
+      </div>
+      
+      <label>From:
+        <input type="text" name="from" placeholder="City of departure" required>
+      </label>
+      <label>To:
+        <input type="text" name="to" placeholder="Destination city" required>
+      </label>
+      <label>Date:
+        <input type="date" name="date" required>
+      </label>
+      <button type="submit">Book Ticket</button>
+    </form>
+  </main>
+
+  <div id="bookingResponse"></div>
+
+  <footer>
+    <p>&copy; 2025 ODIAS booking.com. All rights reserved.</p>
+  </footer>
+
+  <script>
+    let selectedBookingType = '';
+
+    function lockBookingType(type) {
+      selectedBookingType = type;
+      const buttons = document.querySelectorAll('.booking-buttons button');
+      buttons.forEach(btn => btn.disabled = true);
+    }
+
+    document.getElementById('bookingForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const from = formData.get('from');
+      const to = formData.get('to');
+      const direction = formData.get('direction');
+      const date = formData.get('date');
+
+      const booking = {
+        from,
+        to,
+        date,
+        type: selectedBookingType,
+        direction
+      };
+
+      try {
+        const res = await fetch(`http://localhost:5000/api/bookings/${selectedBookingType}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(booking)
+        });
+
+        const data = await res.json();
+        document.getElementById('bookingResponse').innerText = `✔️ ${data.message || 'Booking confirmed!'}\n${direction === 'departure' ? 'Departing from' : 'Arriving at'} ${from} to ${to}.`;
+      } catch (error) {
+        document.getElementById('bookingResponse').innerText = '⚠️ Failed to book. Please try again later.';
+      }
+    });
+  </script>
+</body>
+</html>

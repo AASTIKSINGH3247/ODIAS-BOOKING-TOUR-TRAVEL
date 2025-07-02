@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ODIAS | Online Shop</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f4f7fa;
+      color: #333;
+    }
+
+    header {
+      background-color: #0a74da;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    #productList {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: #222;
+    }
+
+    .card p {
+      font-size: 1rem;
+      color: #444;
+      margin-bottom: 1rem;
+    }
+
+    .card button {
+      background-color: #0a74da;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .card button:hover {
+      background-color: #064ea3;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      padding: 2rem 0;
+      background: #333;
+      color: #fff;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🛒 ODIAS Online Shop</h1>
+    <p>Browse top-quality fashion, accessories & electronics</p>
+  </header>
+
+  <main>
+    <div id="productList">Loading products...</div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 ODIAS Online Shopping. All rights reserved.</p>
+  </footer>
+
+  <script>
+    async function loadProducts() {
+      const container = document.getElementById('productList');
+      try {
+        const res = await fetch('http://localhost:5000/api/shop/items');
+        const items = await res.json();
+
+        if (!items || items.length === 0) {
+          throw new Error('Empty');
+        }
+
+        container.innerHTML = items.map(item => `
+          <div class="card">
+            <img src="${item.image || 'https://via.placeholder.com/300x200?text=No+Image'}" alt="${item.name}" />
+            <h3>${item.name}</h3>
+            <p>Price: ₹${item.price}</p>
+            <button>Add to Cart</button>
+          </div>
+        `).join('');
+      } catch (err) {
+        const sampleProducts = [
+          {
+            name: 'Slim Fit Shirt', price: 999,
+            image: 'https://m.media-amazon.com/images/I/61WEcWm+G9L._AC_UL480_FMwebp_QL65_.jpg'
+          },
+          {
+            name: 'Blue Denim Jeans', price: 1199,
+            image: 'https://m.media-amazon.com/images/I/71sNYOzVnbL._AC_UL480_FMwebp_QL65_.jpg'
+          },
+          {
+            name: 'Stylish Analog Watch', price: 1499,
+            image: 'https://m.media-amazon.com/images/I/81ypjzsp+ZL._AC_UL480_FMwebp_QL65_.jpg'
+          },
+          {
+            name: 'Running Shoes', price: 1799,
+            image: 'https://m.media-amazon.com/images/I/71I+p7r1wIL._AC_UL480_FMwebp_QL65_.jpg'
+          },
+          {
+            name: 'Laptop Backpack', price: 899,
+            image: 'https://m.media-amazon.com/images/I/81rpnwB2JjL._AC_UL480_FMwebp_QL65_.jpg'
+          },
+          {
+            name: 'Bluetooth Headphones', price: 1299,
+            image: 'https://m.media-amazon.com/images/I/61f1ztJrd-L._AC_UL480_FMwebp_QL65_.jpg'
+          },
+          {
+            name: 'Winter Sweater', price: 1099,
+            image: 'https://m.media-amazon.com/images/I/91a-vKX9KUL._AC_UL480_FMwebp_QL65_.jpg'
+          },
+          {
+            name: 'Floral Kurti', price: 799,
+            image: 'https://m.media-amazon.com/images/I/91cpeEGzG8L._AC_UL480_FMwebp_QL65_.jpg'
+          },
+          {
+            name: 'Silk Saree', price: 1999,
+            image: 'https://m.media-amazon.com/images/I/81gqTogz8JL._AC_UL480_FMwebp_QL65_.jpg'
+          },
+          {
+            name: 'Android Smartphone', price: 9999,
+            image: 'https://m.media-amazon.com/images/I/71rx9I9i3NL._AC_UL480_FMwebp_QL65_.jpg'
+          }
+        ];
+
+        const fullSample = Array.from({ length: 50 }, (_, i) => {
+          const item = sampleProducts[i % sampleProducts.length];
+          return `
+            <div class="card">
+              <img src="${item.image}" alt="${item.name}" />
+              <h3>${item.name}</h3>
+              <p>Price: ₹${item.price}</p>
+              <button>Add to Cart</button>
+            </div>
+          `;
+        }).join('');
+
+        container.innerHTML = `<p>⚠️BOOK NOW :</p>${fullSample}`;
+      }
+    }
+
+    loadProducts();
+  </script>
+</body>
+</html>

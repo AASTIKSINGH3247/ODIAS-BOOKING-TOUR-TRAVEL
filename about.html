@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About ODIAS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #ffffff);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0a74da, #0044cc);
+      color: white;
+      text-align: center;
+      padding: 2.5rem 1rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    header img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid white;
+      margin-bottom: 1rem;
+      animation: pop 1s ease-in-out;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.3rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1100px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    .section {
+      background: white;
+      padding: 2rem;
+      border-radius: 14px;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+
+    .section:hover {
+      transform: translateY(-4px);
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      color: #0a74da;
+      margin-bottom: 1rem;
+    }
+
+    .section p, .founder-details {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    .founder {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .founder img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 3px solid #0a74da;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .founder-details strong {
+      font-size: 1.4rem;
+      color: #0a74da;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .social-links {
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      margin: 0 8px;
+      text-decoration: none;
+      color: white;
+      background-color: #0044cc;
+      padding: 12px;
+      border-radius: 50%;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .social-links a:hover {
+      background-color: white;
+      color: #0a74da;
+      transform: scale(1.1);
+    }
+
+    .testimonial {
+      background: #f0f8ff;
+      border-left: 5px solid #0a74da;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+    }
+
+    .testimonial strong {
+      color: #0a74da;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+    }
+
+    .faq-item {
+      margin-bottom: 1rem;
+    }
+
+    .faq-item h4 {
+      margin-bottom: 0.5rem;
+      color: #0a74da;
+    }
+
+    .team-grid {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .team-member {
+      background: #fff;
+      flex: 1 1 200px;
+      text-align: center;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.3s;
+    }
+
+    .team-member:hover {
+      transform: translateY(-5px);
+    }
+
+    .team-member img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 0.8rem;
+    }
+
+    .newsletter input[type="email"] {
+      padding: 0.8rem;
+      width: 70%;
+      max-width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 6px 0 0 6px;
+      outline: none;
+    }
+
+    .newsletter button {
+      padding: 0.8rem 1.2rem;
+      background: #0a74da;
+      color: white;
+      border: none;
+      border-radius: 0 6px 6px 0;
+      cursor: pointer;
+    }
+
+    .newsletter button:hover {
+      background: #0044cc;
+    }
+
+    footer {
+      background: #0044cc;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .founder {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .founder-details {
+        text-align: left;
+      }
+
+      .newsletter input[type="email"] {
+        width: 100%;
+        margin-bottom: 0.5rem;
+        border-radius: 6px;
+      }
+
+      .newsletter button {
+        width: 100%;
+        border-radius: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="https://cdn-icons-png.flaticon.com/512/201/201623.png" alt="ODIAS Logo" />
+    <h1>About ODIAS</h1>
+    <p>Your trusted travel booking partner</p>
+  </header>
+
+  <main>
+    <div class="section">
+      <h2>Our Company</h2>
+      <p>ODIAS is India’s travel transformation engine. We simplify journeys by connecting flights, trains, cabs, and buses under one smart, reliable platform — secure, affordable, and seamless.</p>
+    </div>
+
+    <div class="section">
+      <h2>Founder & CEO</h2>
+      <div class="founder">
+        <img src="https://i.imgur.com/9XnI1XE.jpg" alt="Saurav Raj" />
+        <div class="founder-details">
+          <strong>Saurav Raj</strong><br>
+          <em>Full Stack Dev | Tech Influencer | Engineer</em><br><br>
+          Saurav Raj is a tech visionary with a passion for real-world impact. He has built scalable web platforms, authored 1000+ LeetCode solutions, and mentors 140K+ coders.
+          <br><br>
+          <strong>Skills:</strong>
+          <ul>
+            <li>Languages: Python, Java, JavaScript, C++</li>
+            <li>Tools: Firebase, MongoDB, Tailwind, React.js</li>
+            <li>Ethical Hacking, SEO, Linux, DevOps</li>
+          </ul>
+          <strong>Achievements:</strong>
+          <ul>
+            <li>Built multiple tech startups</li>
+            <li>Top tech content creator</li>
+            <li>Explores AI, blockchain, and automation</li>
+          </ul>
+          <p>📬 Connect:</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Testimonials</h2>
+      <div class="testimonial">
+        <strong>Ravi K. — Frequent Flyer</strong>
+        "ODIAS made my travel seamless. Fast booking, great UI, and zero issues!"
+      </div>
+      <div class="testimonial">
+        <strong>Neha S. — Student</strong>
+        "I love the train + cab combo. Saved hours. Their support team rocks!"
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Gallery</h2>
+      <div class="gallery">
+        <img src="https://source.unsplash.com/featured/?train" alt="Train">
+        <img src="https://source.unsplash.com/featured/?flight" alt="Flight">
+        <img src="https://source.unsplash.com/featured/?taxi" alt="Taxi">
+        <img src="https://source.unsplash.com/featured/?india,travel" alt="India Travel">
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Meet Our Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <img src="https://i.pravatar.cc/100?img=1" alt="Team Member" />
+          <p><strong>Ritika Sharma</strong><br>Marketing Lead</p>
+        </div>
+        <div class="team-member">
+          <img src="https://i.pravatar.cc/100?img=2" alt="Team Member" />
+          <p><strong>Aman Gupta</strong><br>Product Designer</p>
+        </div>
+        <div class="team-member">
+          <img src="https://i.pravatar.cc/100?img=3" alt="Team Member" />
+          <p><strong>Neeraj Jain</strong><br>Backend Engineer</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>FAQs</h2>
+      <div class="faq-item">
+        <h4>Is ODIAS available across India?</h4>
+        <p>Yes, we serve PAN-India locations with expanding routes monthly.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Can I cancel or reschedule my booking?</h4>
+        <p>Yes! We offer instant cancellation and flexible rescheduling.</p>
+      </div>
+    </div>
+
+    <div class="section newsletter">
+      <h2>Subscribe to Our Newsletter</h2>
+      <p>Stay updated with travel tips, discounts & platform updates.</p>
+      <form action="#">
+        <input type="email" placeholder="Enter your email" required />
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+
+    <div class="section">
+      <h2>Contact Us</h2>
+      <p><strong>Email:</strong> sk6162906@gmail.com</p>
+      <p><strong>Phone:</strong> +91-780866-6431</p>
+      <p><strong>Address:</strong> karnataka, Bengaluru, pincode:- 562110 India</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 <strong>ODIASbooking.com</strong> — Built with 💙 by Saurav Raj</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>User Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(to right, #f0f4f8, #d9e4f5);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #1e3a8a;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+
+    main {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    #userInfo {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    #userInfo p {
+      margin-bottom: 1rem;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      font-weight: bold;
+      background-color: #dc2626;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #b91c1c;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #1e3a8a;
+      color: white;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+
+      #userInfo {
+        padding: 1.5rem;
+        font-size: 1rem;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>👤 User Dashboard</h1>
+  </header>
+
+  <main>
+    <div id="userInfo">Loading user info...</div>
+  </main>
+
+  <footer>
+    &copy; 2025 ODIAS Technologies. All rights reserved.
+  </footer>
+
+  <script>
+    async function fetchUser() {
+      const token = localStorage.getItem('token');
+      const output = document.getElementById('userInfo');
+
+      if (!token) {
+        output.innerHTML = '<p>⚠️ Not logged in.</p>';
+        return;
+      }
+
+      try {
+        const res = await fetch('http://localhost:5000/api/auth/user', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          output.innerHTML = `
+            <p>👤 <strong>Name:</strong> ${data.name}</p>
+            <p>📧 <strong>Email:</strong> ${data.email}</p>
+            <button onclick="logout()">Logout</button>
+          `;
+        } else {
+          output.innerHTML = '<p>❌ Unable to load user info</p>';
+        }
+      } catch (error) {
+        output.innerHTML = `<p>❌ Error: ${error.message}</p>`;
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('token');
+      window.location.href = "login.html";
+    }
+
+    fetchUser();
+  </script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ODIAS | Server Status</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(120deg, #e0f7fa, #ffffff);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0a74da, #0044cc);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.2rem;
+    }
+
+    main {
+      max-width: 750px;
+      margin: 3rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    main p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      color: #444;
+    }
+
+    button {
+      padding: 0.9rem 2rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      background: linear-gradient(to right, #0a74da, #0077ff);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s ease, transform 0.2s;
+      margin-bottom: 1.5rem;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #064ea3, #0051a8);
+      transform: scale(1.05);
+    }
+
+    pre#statusOutput {
+      text-align: left;
+      background: #1e1e1e;
+      color: #00ff90;
+      padding: 1.5rem;
+      border-radius: 12px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      transition: all 0.3s ease-in-out;
+    }
+
+    pre#statusOutput::selection {
+      background: #0044cc;
+      color: white;
+    }
+
+    footer {
+      margin-top: auto;
+      background: #0044cc;
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.7rem;
+      }
+
+      button {
+        width: 100%;
+        font-size: 1rem;
+      }
+
+      pre#statusOutput {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🖥️ ODIAS Server & API Status</h1>
+  </header>
+
+  <main>
+    <p>Check the current connection to your backend server and view API response.</p>
+    <button onclick="checkStatus()">🔄 Check Server</button>
+    <pre id="statusOutput">Click the button above to check status...</pre>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 ODIAS Technologies. All rights reserved.</p>
+  </footer>
+
+  <script>
+    async function checkStatus() {
+      const output = document.getElementById('statusOutput');
+      output.textContent = '⏳ Checking server... Please wait...';
+      try {
+        const res = await fetch('http://localhost:5000/api/shop/items');
+        if (res.ok) {
+          const data = await res.json();
+          output.textContent = '✅ Server is online.\n\n' + JSON.stringify(data, null, 2);
+        } else {
+          output.textContent = '❌ Server responded with an error.\n\nStatus Code: ' + res.status;
+        }
+      } catch (err) {
+        output.textContent = '❌ Unable to connect to the server.\n\nDetails: ' + err.message;
+      }
+    }
+  </script>
+</body>
+</html>

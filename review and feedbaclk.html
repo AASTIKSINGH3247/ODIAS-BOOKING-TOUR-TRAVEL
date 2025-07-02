@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reviews & Feedbacks </title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #ffffff);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0a74da, #0044cc);
+      color: white;
+      text-align: center;
+      padding: 2.5rem 1rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    header img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid white;
+      margin-bottom: 1rem;
+      animation: pop 1s ease-in-out;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.3rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1100px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    .section {
+      background: white;
+      padding: 2rem;
+      border-radius: 14px;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+
+    .section:hover {
+      transform: translateY(-4px);
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      color: #0a74da;
+      margin-bottom: 1rem;
+    }
+
+    .section p, .founder-details {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    .founder {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .founder img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 3px solid #0a74da;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .founder-details strong {
+      font-size: 1.4rem;
+      color: #0a74da;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .social-links {
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      margin: 0 8px;
+      text-decoration: none;
+      color: white;
+      background-color: #0044cc;
+      padding: 12px;
+      border-radius: 50%;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .social-links a:hover {
+      background-color: white;
+      color: #0a74da;
+      transform: scale(1.1);
+    }
+
+    .testimonial {
+      background: #f0f8ff;
+      border-left: 5px solid #0a74da;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+    }
+
+    .testimonial strong {
+      color: #0a74da;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+    }
+
+    .faq-item {
+      margin-bottom: 1rem;
+    }
+
+    .faq-item h4 {
+      margin-bottom: 0.5rem;
+      color: #0a74da;
+    }
+
+    .team-grid {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .team-member {
+      background: #fff;
+      flex: 1 1 200px;
+      text-align: center;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.3s;
+    }
+
+    .team-member:hover {
+      transform: translateY(-5px);
+    }
+
+    .team-member img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 0.8rem;
+    }
+
+    .newsletter input[type="email"] {
+      padding: 0.8rem;
+      width: 70%;
+      max-width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 6px 0 0 6px;
+      outline: none;
+    }
+
+    .newsletter button {
+      padding: 0.8rem 1.2rem;
+      background: #0a74da;
+      color: white;
+      border: none;
+      border-radius: 0 6px 6px 0;
+      cursor: pointer;
+    }
+
+    .newsletter button:hover {
+      background: #0044cc;
+    }
+
+    .rating-stars i {
+      color: #ddd;
+      cursor: pointer;
+      font-size: 1.5rem;
+      transition: color 0.3s;
+    }
+
+    .rating-stars i.active {
+      color: #ffc107;
+    }
+
+    .feedback-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .feedback-form textarea {
+      padding: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      resize: vertical;
+    }
+
+    .feedback-form button {
+      align-self: flex-start;
+      padding: 0.7rem 1.2rem;
+      background-color: #0a74da;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .feedback-form button:hover {
+      background-color: #0044cc;
+    }
+
+    footer {
+      background: #0044cc;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .founder {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .founder-details {
+        text-align: left;
+      }
+
+      .newsletter input[type="email"],
+      .newsletter button {
+        width: 100%;
+        border-radius: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="https://cdn-icons-png.flaticon.com/512/201/201623.png" alt="ODIAS Logo" />
+    <h1>Reviews & Feedbacks </h1>
+    <p>Your trusted travel booking partner</p>
+  </header>
+
+  <main>
+    <!-- Existing content omitted for brevity -->
+
+    <div class="section">
+      <h2>Feedback & Ratings</h2>
+      <form class="feedback-form">
+        <label for="rating">Your Rating:</label>
+        <div class="rating-stars" id="rating-stars">
+          <i class="fas fa-star" data-value="1"></i>
+          <i class="fas fa-star" data-value="2"></i>
+          <i class="fas fa-star" data-value="3"></i>
+          <i class="fas fa-star" data-value="4"></i>
+          <i class="fas fa-star" data-value="5"></i>
+        </div>
+        <label for="feedback">Your Feedback:</label>
+        <textarea id="feedback" rows="4" placeholder="Write your feedback here..." required></textarea>
+        <button type="submit">Submit Feedback</button>
+      </form>
+    </div>
+
+    <div class="section">
+      <h2>Contact Us</h2>
+      <p><strong>Email:</strong> sk6162906@gmail.com</p>
+      <p><strong>Phone:</strong> +91-780866-6431</p>
+      <p><strong>Address:</strong> Karnataka, Bengaluru, Pincode: 562110, India</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 <strong>ODIASbooking.com</strong> — Built with 💙 by Saurav Raj</p>
+  </footer>
+
+  <script>
+    // Star rating interaction
+    const stars = document.querySelectorAll('#rating-stars i');
+    let rating = 0;
+
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        rating = star.getAttribute('data-value');
+        stars.forEach(s => {
+          s.classList.remove('active');
+          if (s.getAttribute('data-value') <= rating) {
+            s.classList.add('active');
+          }
+        });
+      });
+    });
+
+    document.querySelector('.feedback-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const feedback = document.getElementById('feedback').value;
+      alert(`Thank you! Your rating: ${rating} star(s)\nFeedback: ${feedback}`);
+      this.reset();
+      stars.forEach(s => s.classList.remove('active'));
+      rating = 0;
+    });
+  </script>
+
+</body>
+</html>
